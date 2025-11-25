@@ -1,11 +1,9 @@
 ﻿using Avalonia.Controls;
 
-namespace NetTrainer.Views;
-
-public partial class MainView : UserControl
+namespace NetTrainer.Views
 {
-    public MainView()
+    public partial class MainView : UserControl
     {
-        InitializeComponent();
+        public MainView() => InitializeComponent();
     }
 }

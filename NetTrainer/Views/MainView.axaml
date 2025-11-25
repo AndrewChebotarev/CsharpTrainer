@@ -1,16 +1,77 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:NetTrainer.ViewModels"
+﻿<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:NetTrainer.ViewModels;assembly=NetTrainer"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="NetTrainer.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:Class="NetTrainer.Views.MainView">
+  
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding NavigationPanelWidth}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+    
+        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#cccccc" Background="#f0f0f0">
+      
+          <StackPanel Background="gray">
+
+            <TextBlock HorizontalAlignment="Center" Margin="20" Text="Меню" Foreground="white" FontSize="16" />
+
+            <Button HorizontalAlignment="Center" Width="100" Margin="15" CornerRadius="10">
+                <TextBlock HorizontalAlignment="Center" Foreground="white">Главная</TextBlock>
+            </Button>
+
+            <Button HorizontalAlignment="Center" Width="110" Margin="10" CornerRadius="10">
+                <TextBlock HorizontalAlignment="Center" Foreground="white">Введение</TextBlock>
+            </Button>
+
+            <Button HorizontalAlignment="Center" Width="110" CornerRadius="10">
+                <TextBlock HorizontalAlignment="Center" Foreground="white">Глава 1 - C#</TextBlock>
+            </Button>
+
+          </StackPanel>
+      
+        </Border>
+
+        <Border Grid.Column="1" Background="White">
+
+          <Grid>
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding CurrentPage}" Foreground="Black" FontSize="16"/>
+
+            <Button Classes="NextButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="50, 20" CornerRadius="10" Background="gray">
+                <TextBlock Foreground="white">Вперед</TextBlock>
+            </Button>
+        
+            <Button Classes="MenuControlButton" Command="{Binding ToggleNavigationCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="30" Margin="-30,30" Background="#2D2A2A">
+                <TextBlock HorizontalAlignment="Right" Margin="0,0,5,0" Text="{Binding NavigationPanelIcon}" Foreground="White"/>
+            </Button>
+
+          </Grid>
+
+        </Border>
+
+    </Grid>
+
+    <UserControl.Styles>
+
+        <Style Selector="Button.MenuControlButton /template/ ContentPresenter:pointerover">
+	        <Setter Property="Background" Value="black"/>
+		</Style>
+		<Style Selector="Button.MenuControlButton /template/ ContentPresenter:pressed">
+			<Setter Property="Background" Value="black"/>
+		</Style>
+
+        <Style Selector="Button.NextButton /template/ ContentPresenter:pointerover">
+	        <Setter Property="Background" Value="gray"/>
+		</Style>
+		<Style Selector="Button.NextButton /template/ ContentPresenter:pressed">
+			<Setter Property="Background" Value="gray"/>
+		</Style>
+
+    </UserControl.Styles>
+
 </UserControl>
